@@ -16,6 +16,9 @@ body {
 li {
     list-style-type: none;
 }
+li:hover {
+    background-color: aqua;
+}
 
 ul {
     padding: 15px;
@@ -31,7 +34,7 @@ ul {
 
 .grid {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 }
 
 .grid-item {
@@ -43,9 +46,11 @@ ul {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: darkslategrey;
+    background-image: linear-gradient(rgb(29, 29, 29), rgb(0, 0, 0));
     color: white;
     text-align: center;
+    font-family: sans-serif;
+    font-size: 14px;
  }
 
  #menuBtn {
@@ -72,10 +77,11 @@ ul {
  @keyframes pulse{
     0% {
         background-color: rgba(42, 49, 56, 0);
-      }
-      100% {
+    }
+    
+    100% {
         background-color: rgb(31, 29, 39);
-      }
+    }
  }
 
  #relogio {

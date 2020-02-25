@@ -8,9 +8,6 @@ ipcMain.on('terminal', function(event){
             console.log(err);
             return;
         }
-    
-        console.log(`stdout:: ${stdout}`);
-        console.log(`stderr:: ${stderr}`);
     });
 })
 
@@ -20,9 +17,6 @@ ipcMain.on('firefox', function(event){
             console.log(err);
             return;
         }
-    
-        console.log(`stdout:: ${stdout}`);
-        console.log(`stderr:: ${stderr}`);
     });
 })
 
@@ -32,36 +26,45 @@ ipcMain.on('thunar', function(event){
             console.log(err);
             return;
         }
-    
-        console.log(`stdout:: ${stdout}`);
-        console.log(`stderr:: ${stderr}`);
     });
 })
 
-    function createWindow () {
-        const { width, height } = screen.getPrimaryDisplay().workAreaSize
-        // Cria uma janela de navegação.
-        let win = new BrowserWindow({
-            width: width,
-            height: height,
-            type: 'desktop',
-            webPreferences: {
-            nodeIntegration: true
-            }
-        })
+myObj = {}
 
-        console.log(width, height)
+myObj.list = function(callback){
+    let result;
+    exec('cat /sys/class/power_supply/BAT0/capacity',  (error, stdout, stderr) => {
+        callback(stdout)
+    })
+}
 
-        // e carregar o index.html do aplicativo.
-        win.loadFile('index.html')
+myObj.list(function(stdout){
+    module.exports = {stdout}
+})
 
-        // fullscreen
-        win.setFullScreen(true)
 
-        // win.setKiosk(true)
+function createWindow () {
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize
+    // Cria uma janela de navegação.
+    let win = new BrowserWindow({
+        width: width,
+        height: height,
+        type: 'desktop',
+        webPreferences: {
+        nodeIntegration: true
+        }
+    })
 
-        // Open the DevTools.
-        // win.webContents.openDevTools()
+    // e carregar o index.html do aplicativo.
+    win.loadFile('index.html')
+
+    // fullscreen
+    win.setFullScreen(true)
+
+    // win.setKiosk(true)
+
+    // Open the DevTools.
+    win.webContents.openDevTools()
 }
 
 app.whenReady().then(createWindow)

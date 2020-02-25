@@ -7,7 +7,10 @@ const thunarBtn = document.getElementById('thunar');
 const menuBtn = document.getElementById('menuBtn');
 const menu = document.getElementById("menu");
 const menuDireito = document.getElementById("menuDireito");
+const bateria = document.getElementById('bateria')
 const el = document.querySelector(".item");
+
+bateria.innerHTML = "b:"
 
 el.addEventListener("mousedown", mousedown);
 
@@ -39,6 +42,14 @@ function mousedown(e){
 
 // body click
 function mouseButton(event){
+    if(event.button == 0){
+        //if (menu.style.display == "block") {
+        //    menu.style.display = "none";
+        //}
+        //if (menuDireito.style.display == "block") {
+        //    menuDireito.style.display = "none";
+        //}
+    }
     if(event.button == 2){
         if(menuDireito.style.display == "none"){
             menuDireito.style.left = event.clientX + "px"
@@ -110,3 +121,4 @@ function checkTime(i){
 
 startTime()
 /////////////////////////////
+
