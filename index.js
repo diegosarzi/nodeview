@@ -12,6 +12,7 @@ const menuDireito = document.getElementById("menuDireito");
 const bateria = document.getElementById('bateria')
 const wifiBtn = document.getElementById('wifi')
 const volumeBtn = document.getElementById('volume')
+const exitNode = document.getElementById('exit')
 
 // const el = document.querySelector(".item");
 
@@ -133,7 +134,13 @@ volumeBtn.addEventListener('click', function(){
     exec("pavucontrol", (err, stdout, stderr) => {
         // console...
     })
-   
+    displayMenu() 
+})
+
+exitNode.addEventListener('click', function(){
+    exec("killall node && killall openbox", (err, stdout, stderr) => {
+        // console...
+    })
 })
 
 /////////////////////////////
