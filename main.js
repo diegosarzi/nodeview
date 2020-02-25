@@ -50,6 +50,8 @@ ipcMain.on('thunar', function(event){
             }
         })
 
+        console.log(width, height)
+
         // e carregar o index.html do aplicativo.
         win.loadFile('index.html')
 

@@ -9,10 +9,17 @@ body {
     overflow-y: hidden; /* Hide vertical scrollbar */
     overflow-x: hidden; /* Hide horizontal scrollbar */
     cursor: default;
+    background-image: url('img/background.jpg');
+    background-size: cover;
 }
 
 li {
     list-style-type: none;
+}
+
+ul {
+    padding: 15px;
+    margin: 0;
 }
 
 .item {
@@ -50,10 +57,25 @@ li {
  #menu {
      position: absolute;
      bottom: 20px;
-     width: 250px;
-     height: 300px;
+     width: 150px;
      background-color: rgb(25, 41, 41);
      color: white;
+ }
+
+ #menuDireito {
+    position: absolute;
+    color: rgb(192, 192, 192);
+    animation: pulse 0.5s;
+    background-color: rgb(31, 29, 39);
+ }
+
+ @keyframes pulse{
+    0% {
+        background-color: rgba(42, 49, 56, 0);
+      }
+      100% {
+        background-color: rgb(31, 29, 39);
+      }
  }
 
  #relogio {

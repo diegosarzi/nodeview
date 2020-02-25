@@ -6,6 +6,7 @@ const firefoxBtn = document.getElementById('firefox');
 const thunarBtn = document.getElementById('thunar');
 const menuBtn = document.getElementById('menuBtn');
 const menu = document.getElementById("menu");
+const menuDireito = document.getElementById("menuDireito");
 const el = document.querySelector(".item");
 
 el.addEventListener("mousedown", mousedown);
@@ -39,7 +40,18 @@ function mousedown(e){
 // body click
 function mouseButton(event){
     if(event.button == 2){
-        console.log("menu");
+        if(menuDireito.style.display == "none"){
+            menuDireito.style.left = event.clientX + "px"
+            menuDireito.style.top = event.clientY + "px"
+            menuDireito.style.display = "block";
+
+            if (menu.style.display == "block") {
+                menu.style.display = "none";
+            }
+
+         } else {
+             menuDireito.style.display = "none"
+         }
     }
 }
 
@@ -47,6 +59,9 @@ function mouseButton(event){
 menuBtn.addEventListener('click', function(){
     if(menu.style.display == "none"){
        menu.style.display = "block";
+       if(menuDireito.style.display == "block"){
+           menuDireito.style.display = "none";
+       }
     } else {
         menu.style.display = "none"
     }
