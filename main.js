@@ -29,20 +29,6 @@ ipcMain.on('thunar', function(event){
     });
 })
 
-myObj = {}
-
-myObj.list = function(callback){
-    let result;
-    exec('cat /sys/class/power_supply/BAT0/capacity',  (error, stdout, stderr) => {
-        callback(stdout)
-    })
-}
-
-myObj.list(function(stdout){
-    module.exports = {stdout}
-})
-
-
 function createWindow () {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
     // Cria uma janela de navegação.

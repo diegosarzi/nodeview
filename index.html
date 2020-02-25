@@ -8,12 +8,12 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body onmousedown="mouseButton(event)">
-      <div class="item">
+      <!-- <div class="item">
           <div class="resizer ne"></div>
           <div class="resizer nw"></div>
           <div class="resizer sw"></div>
           <div class="resizer se"></div>
-      </div>
+      </div> -->
 
       <div id="menu" style="display: none;">
         <ul>
@@ -35,10 +35,14 @@
 
 
       <div id="footer" class="grid">
-        <div id="menuBtn" class="grid-item">menu</div>
+        <div id="menuBtn" class="grid-item"><img src="./img/menu.png" alt="menu"></div>
+        <div class="grid-item"></div>
         <div id="bateria" class="grid-item"></div>
+        <div id="wifi" class="grid-item"><img src="./img/wifi.png" alt="network" onclick="nmtui()"></div>
+        <div id="volume" class="grid-item"><img src="./img/volume.png" alt="volume" onclick="volume()"></div>
         <div id="relogio" class="grid-item"></div>
       </div>
     <script src="index.js"></script>
+    <script>function teste(){ console.log('teste')}</script>
   </body>
 </html>

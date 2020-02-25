@@ -1,6 +1,8 @@
 const electron = require("electron");
 const ipc = electron.ipcRenderer;
 
+const { exec } = require('child_process');
+
 const terminalBtn = document.getElementById('terminal');
 const firefoxBtn = document.getElementById('firefox');
 const thunarBtn = document.getElementById('thunar');
@@ -8,13 +10,40 @@ const menuBtn = document.getElementById('menuBtn');
 const menu = document.getElementById("menu");
 const menuDireito = document.getElementById("menuDireito");
 const bateria = document.getElementById('bateria')
-const el = document.querySelector(".item");
+const wifiBtn = document.getElementById('wifi')
+const volumeBtn = document.getElementById('volume')
 
-bateria.innerHTML = "b:"
+// const el = document.querySelector(".item");
 
-el.addEventListener("mousedown", mousedown);
+function displayMenu(){
+    if(menu.style.display == "block"){
+        menu.style.display = "none";
+    }
+}
 
-function mousedown(e){
+function updateBat() {
+    exec('cat /sys/class/power_supply/BAT0/capacity && cat /sys/class/power_supply/BAT0/status',  (error, stdout, stderr) => { 
+        if(stdout.split("\n")[1] == 'Charging'){
+            bateria.innerHTML = '<img src="./img/plug.png" alt="Baterry Charging" style="padding-right: 8px;">' + stdout.split("\n")[0] + "% - " + stdout.split("\n")[1]
+        } else if(stdout.split("\n")[1] == 'Unknown'){
+            bateria.innerHTML = '<img src="./img/loading.gif" alt="Update Battery Status" style="padding-right: 8px;">' + stdout.split("\n")[0] + "% - " + "Updating"
+        }
+        else {
+            bateria.innerHTML = '<img src="./img/batery.png" alt="Battery Discharging">' + stdout.split("\n")[0] + "% - " + stdout.split("\n")[1]
+        }
+    })
+    return
+}
+
+updateBat()
+
+setInterval(() => {
+    updateBat()
+}, 1000);
+
+// el.addEventListener("mousedown", mousedown);
+
+/*function mousedown(e){
     window.addEventListener("mousemove", mousemove);
     window.addEventListener("mouseup", mouseup);
 
@@ -39,7 +68,7 @@ function mousedown(e){
         window.removeEventListener("mouseup", mouseup);
     }
 }
-
+*/
 // body click
 function mouseButton(event){
     if(event.button == 0){
@@ -80,24 +109,33 @@ menuBtn.addEventListener('click', function(){
 
 terminalBtn.addEventListener('click', function(){
     ipc.send('terminal');
-    if(menu.style.display == "block"){
-        menu.style.display = "none";
-    }
+    displayMenu()
 })
 
 firefoxBtn.addEventListener('click', function(){
     ipc.send('firefox');
-    if(menu.style.display == "block"){
-        menu.style.display = "none";
-    }
+    displayMenu()
 })
 
 thunarBtn.addEventListener('click', function(){
     ipc.send('thunar');
-    if(menu.style.display == "block"){
-        menu.style.display = "none";
-    }
+    displayMenu()
 })
+
+wifiBtn.addEventListener('click', function(){
+    exec("xfce4-terminal -x nmtui", (err, stdout, stderr) => {
+        // console...
+    })
+    displayMenu()
+})
+
+volumeBtn.addEventListener('click', function(){
+    exec("pavucontrol", (err, stdout, stderr) => {
+        // console...
+    })
+   
+})
+
 /////////////////////////////
 
 // RELOGIO
