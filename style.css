@@ -1,0 +1,63 @@
+html, 
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: gray;
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    cursor: default;
+}
+
+li {
+    list-style-type: none;
+}
+
+.item {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    background: orange;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.grid-item {
+    padding: 5px;
+}
+
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: darkslategrey;
+    color: white;
+    text-align: center;
+ }
+
+ #menuBtn {
+     margin-left: 5px;
+     text-align: left;
+ }
+
+
+ #menu {
+     position: absolute;
+     bottom: 20px;
+     width: 250px;
+     height: 300px;
+     background-color: rgb(25, 41, 41);
+     color: white;
+ }
+
+ #relogio {
+     margin-right: 5px;
+     text-align: right;
+ }
+
