@@ -37,23 +37,26 @@ function createWindow () {
     let win = new BrowserWindow({
         width: widthArea,
         height: heightArea,
+        resizable: false,
         type: 'desktop',
         webPreferences: {
         nodeIntegration: true
         }
     })
 
-    // e carregar o index.html do aplicativo.
-    win.loadFile('index.html')
+    win.removeMenu()
 
     // fullscreen
     win.setFullScreen(true)
 
+    // e carregar o index.html do aplicativo.
+    win.loadFile('index.html')
+
+    
     // win.setKiosk(true)
 
     // Open the DevTools.
-    win.webContents.openDevTools()
-
+    // win.webContents.openDevTools()
 
 }
 
@@ -66,9 +69,10 @@ ipcMain.on('openMenu', function(event){
         height: 120,
         width: 80,
         x: 0,
-        y: (heightArea - 120) - 20,
+        y: (heightArea - 120) - 25,
         frame: false,
         transparent:true,
+        resizable: true,
         webPreferences: {
         nodeIntegration: true
     }
@@ -78,10 +82,49 @@ ipcMain.on('openMenu', function(event){
   
     menu.loadFile('menu.html');
 
+    //menu.webContents.openDevTools()
+
 });
 
 ipcMain.on('closeMenu', function(event){
 
-    menu.close()
+    if(menu){
+        menu.close()
+    }
+});
+
+let systemMenuOpen = false;
+
+ipcMain.on('openSystemMenu', function(event){
+
+    systemMenu = new BrowserWindow({
+        height: 40,
+        width: 120,
+        x: 78,
+        y: (heightArea - 120) - 25,
+        frame: false,
+        transparent:true,
+        resizable: true,
+        webPreferences: {
+        nodeIntegration: true
+    }
+    });
+
+    systemMenu.removeMenu()
+  
+    systemMenu.loadFile('system-menu.html');
+
+    systemMenuOpen = true;
+
+    //systemMenu.webContents.openDevTools()
+
+})
+
+ipcMain.on('closeSystemMenu', function(event){
+
+    if(systemMenuOpen){
+        systemMenu.close();
+        systemMenuOpen = false;
+    }
 
 });

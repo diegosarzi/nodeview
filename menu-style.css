@@ -1,6 +1,8 @@
 body {
     margin: 0;
     height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 li {
@@ -37,4 +39,6 @@ ul {
    font-family: sans-serif;
    font-size: 14px;
    opacity: 0.8;
+   width: 120px;
+   height: 40px;
 }

@@ -8,6 +8,7 @@ const bateria = document.getElementById('bateria')
 const wifiBtn = document.getElementById('wifi')
 const volumeBtn = document.getElementById('volume')
 const menuBtn = document.getElementById('menuBtn')
+const bodyId = document.getElementById('bodyId')
 
 // const el = document.querySelector(".item");
 
@@ -113,16 +114,17 @@ startTime()
 /////////////////////////////
 
 let open = false;
+let click = false;
 
 menuBtn.addEventListener('click', function(){
     if(!open){
         ipc.send('openMenu');
-        console.log('open')
         open = true;
+        click = false;
     } else {
         ipc.send('closeMenu');
-        console.log('close')
         open = false;
+        click = true;
     }
 })
 
@@ -138,4 +140,15 @@ volumeBtn.addEventListener('click', function(){
         // console...
     })
     displayMenu() 
+})
+
+
+bodyId.addEventListener('click', function(){
+    if(open && click){
+        ipc.send('closeMenu')
+        click = false;
+        open = false;
+    } else {
+        click = true;
+    }
 })
