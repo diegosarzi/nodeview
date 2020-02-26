@@ -82,7 +82,7 @@ ipcMain.on('openMenu', function(event){
   
     menu.loadFile('menu.html');
 
-    //menu.webContents.openDevTools()
+    // menu.webContents.openDevTools()
 
 });
 

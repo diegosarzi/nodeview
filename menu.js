@@ -1,6 +1,8 @@
 const electron = require("electron");
 const ipc = electron.ipcRenderer;
 
+const { exec } = require('child_process');
+
 const firefoxBtn = document.getElementById('firefox');
 const thunarBtn = document.getElementById('thunar');
 const menu = document.getElementById("menu");
@@ -19,6 +21,7 @@ thunarBtn.addEventListener('click', function(){
 })
 
 exitNode.addEventListener('click', function(){
+    console.log('click')
     exec("killall node && killall openbox", (err, stdout, stderr) => {
         // console...
     })
