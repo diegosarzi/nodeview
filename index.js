@@ -3,24 +3,13 @@ const ipc = electron.ipcRenderer;
 
 const { exec } = require('child_process');
 
-const terminalBtn = document.getElementById('terminal');
-const firefoxBtn = document.getElementById('firefox');
-const thunarBtn = document.getElementById('thunar');
-const menuBtn = document.getElementById('menuBtn');
-const menu = document.getElementById("menu");
 const menuDireito = document.getElementById("menuDireito");
 const bateria = document.getElementById('bateria')
 const wifiBtn = document.getElementById('wifi')
 const volumeBtn = document.getElementById('volume')
-const exitNode = document.getElementById('exit')
+const menuBtn = document.getElementById('menuBtn')
 
 // const el = document.querySelector(".item");
-
-function displayMenu(){
-    if(menu.style.display == "block"){
-        menu.style.display = "none";
-    }
-}
 
 function updateBat() {
     exec('cat /sys/class/power_supply/BAT0/capacity && cat /sys/class/power_supply/BAT0/status',  (error, stdout, stderr) => { 
@@ -96,52 +85,8 @@ function mouseButton(event){
     }
 }
 
-// ATALHOS
-menuBtn.addEventListener('click', function(){
-    if(menu.style.display == "none"){
-       menu.style.display = "block";
-       if(menuDireito.style.display == "block"){
-           menuDireito.style.display = "none";
-       }
-    } else {
-        menu.style.display = "none"
-    }
-})
 
-terminalBtn.addEventListener('click', function(){
-    ipc.send('terminal');
-    displayMenu()
-})
 
-firefoxBtn.addEventListener('click', function(){
-    ipc.send('firefox');
-    displayMenu()
-})
-
-thunarBtn.addEventListener('click', function(){
-    ipc.send('thunar');
-    displayMenu()
-})
-
-wifiBtn.addEventListener('click', function(){
-    exec("xfce4-terminal -x nmtui", (err, stdout, stderr) => {
-        // console...
-    })
-    displayMenu()
-})
-
-volumeBtn.addEventListener('click', function(){
-    exec("pavucontrol", (err, stdout, stderr) => {
-        // console...
-    })
-    displayMenu() 
-})
-
-exitNode.addEventListener('click', function(){
-    exec("killall node && killall openbox", (err, stdout, stderr) => {
-        // console...
-    })
-})
 
 /////////////////////////////
 
@@ -167,3 +112,30 @@ function checkTime(i){
 startTime()
 /////////////////////////////
 
+let open = false;
+
+menuBtn.addEventListener('click', function(){
+    if(!open){
+        ipc.send('openMenu');
+        console.log('open')
+        open = true;
+    } else {
+        ipc.send('closeMenu');
+        console.log('close')
+        open = false;
+    }
+})
+
+wifiBtn.addEventListener('click', function(){
+    exec("xfce4-terminal -x nmtui", (err, stdout, stderr) => {
+        // console...
+    })
+    displayMenu()
+})
+
+volumeBtn.addEventListener('click', function(){
+    exec("pavucontrol", (err, stdout, stderr) => {
+        // console...
+    })
+    displayMenu() 
+})

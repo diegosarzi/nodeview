@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>nodeview</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" type="text/css" href="menu-style.css">
+  </head>
+  <body>
+    <div id="menu">
+      <ul>
+        <li id="systemBtn">System</li>
+        <li>Internet</li>
+        <li>Tools</li>
+        <hr>
+        <li id="exit">exit</li>
+      </ul>
+      
+      <div id="System" style="display: none;">
+        <ul>
+          <li id="terminal">terminal</li>
+        </ul>
+      </div>
+
+      <div id="Internet" style="display: none;">
+        <ul>
+          <li id="firefox">firefox</li>
+        </ul>
+      </div>
+
+      <div id="Tools" style="display: none;">
+        <ul>
+          <li id="thunar">thunar</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div id="menuDireito" style="display: none;">
+      <ul>
+        <li id="terminal">terminal</li>
+        <li id="firefox">firefox</li>
+        <li id="thunar">thunar</li>
+      </ul>
+    </div>
+    <script src="menu.js"></script>
+  </body>
+</html>
